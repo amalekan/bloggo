@@ -1,31 +1,39 @@
-function PostService(){
-
+/*jshint esversion: 6 */
+const baseUrl = 'https://boiling-cliffs-55576.herokuapp.com';
+function PostService($http){
+  const postUrl = `${baseUrl}/posts`;
   return {
     get: get,
     getOne: getOne,
     create: create,
     update: update,
     delete: deleteOne
-  }
+  };
 
   function get(){
-    console.log('getting all of the posts');
+    return $http.get(postUrl)
+                .then(response => response.data.posts);
   }
+
   function getOne(postId){
-    console.log('getting one of the posts');
+    return $http.get(`${postUrl}/${postId}`)
+                .then(response => response.data.posts[0]);
   }
+
   function create(post){
-    console.log('creating a post');
+    return $http.post(postUrl, post);
   }
+
   function update(postId, postUpdates){
-    console.log('updating a post');
+    return $http.put(`${postUrl}/${postId}`, postUpdates);
   }
+
   function deleteOne(postId){
-    console.log('deleting a post');
+    return $http.delete(`${postUrl}/${postId}`);
   }
 }
 
-PostService.$inject = []
+PostService.$inject = ['$http'];
 
 
 module.exports = PostService;
