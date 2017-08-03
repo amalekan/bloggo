@@ -1,10 +1,14 @@
+/*jshint esversion: 6 */
 const controller = require('./home.controller');
 const template = require('./home.html');
 
 
 const component = {
   controller,
-  template
-}
+  template,
+  bindings: {
+    posts: '<'
+  }
+};
 
 module.exports = component;

@@ -1,7 +1,13 @@
+/*jshint esversion: 6 */
+const PostDataResolve = require('./resolves/post-data.resolve');
+
 function RouterConfig($routeProvider) {
   $routeProvider
     .when('/', {
-      template: '<home></home>'
+      template: '<home posts=$resolve.postData></home>',
+      resolve: {
+        postData: PostDataResolve
+      }
     })
     .when('/signup', {
       template: '<signup></signup>'
